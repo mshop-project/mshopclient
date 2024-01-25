@@ -3,10 +3,11 @@ import { ProductsService, ReadProductDto } from '../../products/ts';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import {MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, MatCardModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
