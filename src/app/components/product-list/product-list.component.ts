@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { CartService } from '../../services/cart.service';
 @Component({
   selector: 'app-product-list',
   standalone: true,
@@ -13,11 +14,10 @@ import { MatButtonModule } from '@angular/material/button';
 })
 
 export class ProductListComponent implements OnInit, OnDestroy {
-
-
   products : WritableSignal<Array<ReadProductDto>> = signal([])
   productsService = inject(ProductsService)
   productsService$ : Subscription = null!
+  cartService = inject(CartService)
 
   ngOnInit(): void {
    this.productsService$ = this.productsService.productsGet().subscribe((data) =>{
@@ -25,9 +25,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
    })
   }
 
+  addProduct(readProductDto : ReadProductDto){
+    this.cartService.addProduct(readProductDto)
+  }
+
   ngOnDestroy(): void {
    this.productsService$.unsubscribe()
   }
-
-
 }

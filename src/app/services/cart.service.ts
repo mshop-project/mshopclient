@@ -17,7 +17,12 @@ export class CartService {
 
   deleteProduct(id : string)
   {
-    const updatedData = this.cartData.value.filter(product => product.id !== id);
-    this.cartData.next(updatedData)
+    const currentData = this.cartData.value;
+    const indexToRemove = currentData.findIndex(product => product.id === id);
+
+  if (indexToRemove !== -1) {
+    currentData.splice(indexToRemove, 1); 
+    this.cartData.next(currentData); 
+  }
   }
 }
