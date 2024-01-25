@@ -9,6 +9,9 @@ encoder.ts
 git_push.sh
 index.ts
 model/calculateDiscountDto.ts
+model/createDiscountDto.ts
+model/discountType.ts
 model/models.ts
+model/readCalculatedDiscountDto.ts
 param.ts
 variables.ts

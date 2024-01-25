@@ -1,1 +1,6 @@
-<p>product-list works!</p>
+works
+<mat-card *ngFor="let product of products()">
+    <img [src]="product.imageUrl" alt="{{ product.name }}">
+    <mat-card-title>{{ product.name }}</mat-card-title>
+</mat-card>
+

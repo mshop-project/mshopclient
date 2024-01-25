@@ -12,5 +12,7 @@ index.ts
 model/createCategoryDto.ts
 model/createProductDto.ts
 model/models.ts
+model/readCategoryDto.ts
+model/readProductDto.ts
 param.ts
 variables.ts
