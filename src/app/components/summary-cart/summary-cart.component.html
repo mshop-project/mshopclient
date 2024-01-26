@@ -10,9 +10,11 @@
             <mat-error *ngIf="checkoutForm.controls.email.invalid" class="custom-error">Niepoprawny email</mat-error>
         </mat-form-field>
     </div>
-    <button mat-raised-button color="primary" type="submit">Wylicz rabat</button>
+    <button mat-raised-button color="primary" type="submit">Zatwierdź mail</button>
+  
 </form>
 
 <br />
 
-<button mat-raised-button color="primary" (click)="finalizeOrder()" [disabled]="this.givenEmail() == '' && this.cartData().length<=0">Sfinalizuj zamówienie</button>
+<button mat-raised-button color="primary" (click)="finalizeOrder()" [disabled]="this.givenEmail() == null || this.givenEmail() == '' || this.cartData().length<=0">Sfinalizuj zamówienie</button>
+<p class="information" *ngIf="this.givenEmail() == null || this.givenEmail() == '' || this.cartData().length<=0">Należy dodać mail'a i produkty, aby móc sfinalizować zamówienie</p>

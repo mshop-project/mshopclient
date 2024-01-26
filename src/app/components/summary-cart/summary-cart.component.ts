@@ -80,6 +80,7 @@ export class SummaryCartComponent implements OnInit, OnDestroy, AfterViewInit {
     const $sub = this.orderService.orderPost(orderDto).subscribe(data=>{
       $sub.unsubscribe();
     })
+    this.cartService.cartData.next([])
     this.router.navigate(["finalize"])
   }
 
