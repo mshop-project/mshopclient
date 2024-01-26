@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OrderDto, OrderService } from '../../orders/ts';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-summary-cart',
@@ -29,13 +29,14 @@ export class SummaryCartComponent implements OnInit, OnDestroy, AfterViewInit {
   discount = signal(0)
   endPrice = signal(0)
   checkoutForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]]
+    email: [localStorage.getItem("clientEmail") ?? '', [Validators.required, Validators.email]]
   });
   givenEmail = signal("")
     router = inject(Router)
   
   
   ngOnInit(): void {
+    this.givenEmail.set(localStorage.getItem("clientEmail") ?? '')
     this.cartService$ = this.cartService.cartData.subscribe(data =>
        {
         this.cartService.calculateDiscount()
@@ -80,6 +81,7 @@ export class SummaryCartComponent implements OnInit, OnDestroy, AfterViewInit {
     const $sub = this.orderService.orderPost(orderDto).subscribe(data=>{
       $sub.unsubscribe();
     })
+    localStorage.clear();
     this.cartService.cartData.next([])
     this.router.navigate(["finalize"])
   }
@@ -89,6 +91,7 @@ export class SummaryCartComponent implements OnInit, OnDestroy, AfterViewInit {
     if(this.checkoutForm.value.email)
     {
     const email = this.checkoutForm.value.email!;
+    localStorage.setItem("clientEmail", email)
     this.givenEmail.set(email)
     this.cartService.calculateDiscount(email)
     }

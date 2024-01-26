@@ -19,16 +19,15 @@ export class CartListComponent implements OnInit, OnDestroy{
   cartService = inject(CartService)
   cartService$ : Subscription = null!
   dataToView : WritableSignal<CartProduct[]> = signal([])
-  displayedColumns: string[] = ['name', 'category', 'quantity', 'price', 'action'];
+  displayedColumns: string[] = ['name', 'category', 'quantity', 'price', 'total_price', 'action'];
 
   ngOnInit(): void {
    this.cartService$ = this.cartService.cartData.subscribe(data =>
       {
         this.dataToView.set(this.transformToCartProducts(data))
       })
-      
-
   }
+
   deleteProduct(id: string)
   {
     this.cartService.deleteProduct(id)

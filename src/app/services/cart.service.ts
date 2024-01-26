@@ -12,12 +12,22 @@ export class CartService implements OnDestroy {
 
   discountsService = inject(DiscountsService)
   discountsService$ : Subscription = null!;
-  constructor() { }
+  
+  constructor() { 
+    const oldCartValue = localStorage.getItem('cart');
+    if(oldCartValue)
+    {
+    const oldCart = JSON.parse(oldCartValue);
+    this.cartData.next(oldCart)
+    }
+  }
 
 
   addProduct(readProductDto : ReadProductDto)
   {
-    this.cartData.next([...this.cartData.value, readProductDto])
+    const newCart = [...this.cartData.value, readProductDto];
+    this.cartData.next(newCart)
+    localStorage.setItem("cart", JSON.stringify(newCart));
   }
 
   deleteProduct(id : string)
@@ -28,6 +38,7 @@ export class CartService implements OnDestroy {
   if (indexToRemove !== -1) {
     currentData.splice(indexToRemove, 1); 
     this.cartData.next(currentData); 
+    localStorage.setItem("cart", JSON.stringify(currentData));
   }
   }
 
