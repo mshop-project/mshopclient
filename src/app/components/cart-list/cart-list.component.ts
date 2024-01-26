@@ -19,7 +19,7 @@ export class CartListComponent implements OnInit, OnDestroy{
   cartService$ : Subscription = null!
   dataToView : WritableSignal<CartProduct[]> = signal([])
 
-  displayedColumns: string[] = ['name', 'category', 'quantity', 'price'];
+  displayedColumns: string[] = ['name', 'category', 'quantity', 'price', 'action'];
 
   ngOnInit(): void {
    this.cartService$ = this.cartService.cartData.subscribe(data =>
