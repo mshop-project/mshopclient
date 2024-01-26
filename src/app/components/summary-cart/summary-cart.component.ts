@@ -105,7 +105,7 @@ export class SummaryCartComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   onSubmit(): void  {
-    if(this.checkoutForm.value.email)
+    if(this.checkoutForm.value.email && this.checkoutForm.valid)
     {
     const email = this.checkoutForm.value.email!;
     localStorage.setItem("clientEmail", email)
