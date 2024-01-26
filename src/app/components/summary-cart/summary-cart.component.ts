@@ -34,17 +34,16 @@ export class SummaryCartComponent implements OnInit, OnDestroy, AfterViewInit {
       (control : AbstractControl) => {
         const email = control.value;
         if (!email) {
-          return null; // Dopuszczamy brak adresu email
+          return null;
         }
-    
-        // Wzorzec do sprawdzenia poprawności adresu email
+
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     
         if (!emailPattern.test(email)) {
-          return { invalidFormat: true }; // Nieprawidłowy format e-mail
+          return { invalidFormat: true }; 
         }
     
-        return null; // Poprawny adres e-mail
+        return null; 
       }
     ]]
   });
@@ -56,7 +55,7 @@ export class SummaryCartComponent implements OnInit, OnDestroy, AfterViewInit {
     this.givenEmail.set(localStorage.getItem("clientEmail") ?? '')
     this.cartService$ = this.cartService.cartData.subscribe(data =>
        {
-        this.cartService.calculateDiscount()
+        this.cartService.calculateDiscount(this.givenEmail())
         this.cartData.set(data);
        })
    }
