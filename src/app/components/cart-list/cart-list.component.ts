@@ -5,11 +5,12 @@ import { CartService } from '../../services/cart.service';
 import { Subscription } from 'rxjs';
 import { ReadCategoryDto, ReadProductDto } from '../../products/ts';
 import {MatTableModule} from '@angular/material/table';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cart-list',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatTableModule],
+  imports: [CommonModule, MatButtonModule, MatTableModule, RouterModule],
   templateUrl: './cart-list.component.html',
   styleUrl: './cart-list.component.scss'
 })

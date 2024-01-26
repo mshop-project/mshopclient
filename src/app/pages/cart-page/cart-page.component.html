@@ -1,11 +1,21 @@
+
+<ng-container *ngIf="cartData().length>0; else emptyCart">
 <div style="display: flex;">
     <div style="flex: 70%; border: 1px solid black; padding: 10px;">
       <h2>Koszyk</h2>
       <app-cart-list />
     </div>
+ 
     <div style="flex: 30%; border: 1px solid black; padding: 10px;">
       <h2>Podsumowanie</h2>
       <app-summary-cart />
     </div>
+
   </div>
-  
+</ng-container>
+  <ng-template #emptyCart >
+    <div class="order-confirmation-container">
+      <p>Brak produktów w koszyku</p>
+      <button mat-raised-button color="primary" routerLink="/">Wróć do sklepu</button>
+    </div>
+  </ng-template>

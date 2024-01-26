@@ -1,4 +1,4 @@
-<ng-container *ngIf="dataToView().length>0; else emptyCart">
+<ng-container *ngIf="dataToView().length>0;">
 <table mat-table [dataSource]="dataToView()" class="mat-elevation-z8">
 
     <ng-container matColumnDef="name">
@@ -22,7 +22,7 @@
       <th mat-header-cell *matHeaderCellDef> Cena za produkt </th>
       <td mat-cell *matCellDef="let element"> {{element.price}} </td>
     </ng-container>
-    
+
     <ng-container matColumnDef="total_price">
       <th mat-header-cell *matHeaderCellDef> Całkowita cena </th>
       <td mat-cell *matCellDef="let element"> {{element.price * element.quantity}} </td>
@@ -37,6 +37,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </ng-container>
-  <ng-template #emptyCart>
-      <h4>Brak produktów w koszyku</h4>
-  </ng-template>
+
+
