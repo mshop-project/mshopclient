@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OrderDto, OrderService } from '../../orders/ts';
 import { Router, RouterModule } from '@angular/router';
 
@@ -29,7 +29,24 @@ export class SummaryCartComponent implements OnInit, OnDestroy, AfterViewInit {
   discount = signal(0)
   endPrice = signal(0)
   checkoutForm = this.formBuilder.group({
-    email: [localStorage.getItem("clientEmail") ?? '', [Validators.required, Validators.email]]
+    email: [localStorage.getItem("clientEmail") ?? '', [
+      Validators.required, Validators.email,
+      (control : AbstractControl) => {
+        const email = control.value;
+        if (!email) {
+          return null; // Dopuszczamy brak adresu email
+        }
+    
+        // Wzorzec do sprawdzenia poprawności adresu email
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    
+        if (!emailPattern.test(email)) {
+          return { invalidFormat: true }; // Nieprawidłowy format e-mail
+        }
+    
+        return null; // Poprawny adres e-mail
+      }
+    ]]
   });
   givenEmail = signal("")
     router = inject(Router)
