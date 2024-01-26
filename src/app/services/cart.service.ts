@@ -43,6 +43,7 @@ export class CartService implements OnDestroy {
         this.cartDiscount.next(response.discount!)
       })
   }
+  
   ngOnDestroy(): void {
     this.discountsService$?.unsubscribe()
   }

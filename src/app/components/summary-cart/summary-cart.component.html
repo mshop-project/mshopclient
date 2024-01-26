@@ -1,14 +1,18 @@
-<h5>Cena całkowita: ZŁ</h5>
-<h5>Rabat: </h5>
-<h5>Cena końcowa: ZŁ</h5>
+<h5 class="custom-heading">Cena całkowita: {{ totalPrice() }} ZŁ</h5>
+<h5 class="custom-heading">Rabat: {{ discount() }} %</h5>
+<h5 class="custom-heading">Cena końcowa: {{ endPrice() }} ZŁ</h5>
 
-
-<form [formGroup]="checkoutForm">
-<mat-form-field >
-    <mat-label>Wpisz maila</mat-label>
-    <input mat-input type="email" placeholder="Podaj maila..." >
-</mat-form-field>
-<button mat-raised-button color="primary" type="submit">Wylicz rabat</button>
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <div class="example-container">
+        <mat-form-field>
+            <mat-label>Enter your email</mat-label>
+            <input matInput placeholder="pat@example.com" [formControl]="checkoutForm.controls.email" required>
+            <mat-error *ngIf="checkoutForm.controls.email.invalid" class="custom-error">Niepoprawny email</mat-error>
+        </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit">Wylicz rabat</button>
 </form>
 
-<button mat-raised-button color="primary">Sfinalizuj zamówienie</button>
+<br />
+
+<button mat-raised-button color="primary" (click)="finalizeOrder()" [disabled]="this.givenEmail() == '' && this.cartData().length<=0">Sfinalizuj zamówienie</button>

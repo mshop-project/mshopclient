@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, Type, WritableSignal, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, Type, WritableSignal, inject, signal } from '@angular/core';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { CartService } from '../../services/cart.service';
 import { Subscription } from 'rxjs';
@@ -15,10 +15,10 @@ import {MatTableModule} from '@angular/material/table';
 })
 export class CartListComponent implements OnInit, OnDestroy{
 
+
   cartService = inject(CartService)
   cartService$ : Subscription = null!
   dataToView : WritableSignal<CartProduct[]> = signal([])
-
   displayedColumns: string[] = ['name', 'category', 'quantity', 'price', 'action'];
 
   ngOnInit(): void {
@@ -26,8 +26,9 @@ export class CartListComponent implements OnInit, OnDestroy{
       {
         this.dataToView.set(this.transformToCartProducts(data))
       })
-  }
+      
 
+  }
   deleteProduct(id: string)
   {
     this.cartService.deleteProduct(id)
