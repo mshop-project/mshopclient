@@ -1,1 +1,14 @@
-<p>summary-cart works!</p>
+<h5>Cena całkowita: ZŁ</h5>
+<h5>Rabat: </h5>
+<h5>Cena końcowa: ZŁ</h5>
+
+
+<form [formGroup]="checkoutForm">
+<mat-form-field >
+    <mat-label>Wpisz maila</mat-label>
+    <input mat-input type="email" placeholder="Podaj maila..." >
+</mat-form-field>
+<button mat-raised-button color="primary" type="submit">Wylicz rabat</button>
+</form>
+
+<button mat-raised-button color="primary">Sfinalizuj zamówienie</button>
