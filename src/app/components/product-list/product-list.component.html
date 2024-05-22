@@ -1,24 +1,23 @@
 <div style="display: flex; flex-wrap: wrap;">
-    <div *ngFor="let product of products()" style="margin: 10px;">
-      <div style="height: 200px; width: 200px; display: flex; flex-direction: column; align-items: center;">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>{{ product.name }}</mat-card-title>
-            <mat-card-subtitle>{{ product.category?.name }}</mat-card-subtitle>
-          </mat-card-header>
-          <div style="height: 100px; display: flex; align-items: center; justify-content: center;">
-            <img [src]="product.imageUrl" alt="{{ product.name }}" style="max-height: 100%; max-width: 100%;">
-          </div>
-          <mat-card-content style="text-align: center;">
-            <p>{{ product.description }}</p>
-            <hr />
-            <b>Cena: </b> {{ product.price }}
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="addProduct(product)">Dodaj do koszyka</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
+  <div *ngFor="let product of products()" style="margin: 10px;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ product.name }}</mat-card-title>
+          <mat-card-subtitle>{{ product.category?.name }}</mat-card-subtitle>
+        </mat-card-header>
+        <div style="height: 150px; display: flex; align-items: center; justify-content: center;">
+          <img [src]="product.imageUrl" alt="{{ product.name }}" style="max-height: 100%; max-width: 100%;">
+        </div>
+        <mat-card-content style="text-align: center; height: 100%; width: 200px;">
+          <p>{{ product.description }}</p>
+          <hr />
+          <b>Cena: </b> {{ product.price }}
+        </mat-card-content>
+        <mat-card-actions style=" display: flex; align-items: center; justify-content: center;">
+          <button mat-raised-button color="primary" (click)="addProduct(product)">Dodaj do koszyka</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
-  
+</div>
